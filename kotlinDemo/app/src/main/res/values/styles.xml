@@ -1,0 +1,9 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="styleTextView" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/pin_grey</item>
+        <!--        <item name="android:fontFamily">sans-serif-condensed</item>-->
+        <item name="android:textSize">17sp</item>
+    </style>
+
+</resources>

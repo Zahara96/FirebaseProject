@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:gravity="center"
+    tools:context=".MainActivity">
+
+
+    <LinearLayout
+        android:id="@+id/counter"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_margin="20dp">
+
+        
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/conter"/>
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="70dp"
+            android:layout_height="20dp"
+            android:text="Counter" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/bmi"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_margin="20dp">
+
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/bmi"/>
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="70dp"
+            android:layout_height="20dp"
+            android:text="BMI" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/calculator"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:layout_margin="20dp">
+
+
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/calculator"/>
+
+        <TextView
+            android:gravity="center"
+            android:layout_width="70dp"
+            android:layout_height="20dp"
+            android:text="Calculator" />
+
+    </LinearLayout>
+
+</LinearLayout>
