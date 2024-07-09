@@ -1,5 +1,6 @@
 package com.example.jetpackinitializing
 
+import android.graphics.Paint.Align
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -18,6 +19,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
@@ -38,6 +40,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -46,14 +49,11 @@ import com.example.jetpackinitializing.ui.theme.JetpackInitializingTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
+//        enableEdgeToEdge()
         setContent {
             JetpackInitializingTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Home(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
+                    Home(modifier = Modifier.padding(innerPadding))
                 }
             }
         }
@@ -61,7 +61,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Home(name: String, modifier: Modifier = Modifier) {
+fun Home(modifier: Modifier) {
     Column(
         modifier = Modifier
             .fillMaxSize(),
@@ -108,8 +108,7 @@ fun Home(name: String, modifier: Modifier = Modifier) {
                 ) {
 
                     Column(
-                        modifier = Modifier
-                            .fillMaxSize(),
+                        modifier = Modifier.fillMaxSize(),
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.SpaceBetween
                     ) {
@@ -117,56 +116,26 @@ fun Home(name: String, modifier: Modifier = Modifier) {
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .weight(2f)
-                                .background(color = Color.Gray),
-                            
+                                .clip(RoundedCornerShape(20.dp))
                         ){
                             Image(
                                 painter = painterResource(R.drawable.home_card_bg),
                                 contentDescription = null,
-                                contentScale = ContentScale.Crop,
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .aspectRatio(16f / 9f),
+                                contentScale = ContentScale.FillWidth,
+                                modifier = Modifier.fillMaxSize().background(color = Color(0xFF9988F7)),
+
                             )
-                            Column {
-                                Box(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .weight(1f)
-                                ){
-                                    Column(
-                                        modifier = Modifier
-                                            .fillMaxWidth()
-                                            .padding(16.dp,0.dp)
-                                    ) {
-                                        Text(text = "Account Balance", fontSize = 14.sp, color = Color.White)
-                                        Spacer(modifier = Modifier.height(4.dp))
-                                        Text(text = "KHR 24,500.56", fontSize = 32.sp, color = Color.White, fontWeight = FontWeight.Bold)
-                                    }
-                                }
-                                Box(
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .weight(1f)
-                                ){
-                                    ColorButtonWithImageAfterText(
-                                        onClick = { /* Handle click */ },
-                                        text = "Request Fund",
-                                        image = painterResource(id = R.drawable.next_black_arrow)
-                                    )
-
-                                }
-                            }
-
+                            HomeCard()
                         }
                         Box(
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .weight(3f)
-                                    .background(Color.White)
-                                ){
-
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .weight(3f)
+                                .background(Color.White)
+                        ){
+                            HomeFunction()
                         }
+
                     }
                 }
             }
@@ -175,7 +144,7 @@ fun Home(name: String, modifier: Modifier = Modifier) {
             modifier = Modifier
                 .fillMaxWidth()
                 .weight(1f)
-                .background(Color.White)
+                .background(Color(0xFFF6F5FA))
         ){
 
         }
@@ -217,20 +186,20 @@ fun ColorButtonWithImageAfterText(onClick: () -> Unit, text: String, image: Pain
             containerColor = Color(0xFFFFE040)
         ),
         shape = RoundedCornerShape(16.dp),
-        modifier = Modifier.padding(8.dp)
+        modifier = Modifier.padding(50.dp,0.dp).fillMaxWidth().height(44.dp)
     ) {
         Row(verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
             Text(
                 text = text,
-                fontSize = 12.sp,
-                color = Color.Black
+                fontSize = 18.sp,
+                color = Color.Black,
+                modifier = Modifier.padding(end = 8.dp)
+            )
+            Image(
+                painter = image,
+                contentDescription = null,
             )
         }
-        Image(
-            painter = image,
-            contentDescription = null,
-            modifier = Modifier.padding(end = 8.dp)
-        )
     }
 }
 
@@ -335,10 +304,134 @@ fun HomeTopAction(){
     }
 }
 
+@Composable
+fun HomeCard(){
+    Column (
+        modifier = Modifier.fillMaxSize(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceBetween
+    ){
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f)
+        ){
+            Column(
+                modifier = Modifier.fillMaxSize().padding(16.dp,0.dp),
+                horizontalAlignment = Alignment.Start,
+                verticalArrangement = Arrangement.Center
+            ) {
+                Text(text = "Account Balance", fontSize = 14.sp, color = Color.White)
+                Spacer(modifier = Modifier.height(4.dp))
+                Text(text = "KHR 24,500.56", fontSize = 32.sp, color = Color.White, fontWeight = FontWeight.Bold)
+            }
+        }
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .weight(1f),
+            contentAlignment = Alignment.Center
+
+        ){
+            ColorButtonWithImageAfterText(
+                onClick = { /* Handle click */ },
+                text = "Request Fund",
+                image = painterResource(id = R.drawable.next_black_arrow)
+            )
+
+        }
+    }
+}
+
+
+@Composable
+fun HomeFunction() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(4.dp)
+    ) {
+        for (i in 0..1) { // Adjusted for 2 rows
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                for (j in 0..2) { // Adjusted for 3 columns
+                    val buttonIndex = i * 3 + j + 1
+                    Box(
+                        modifier = Modifier
+                            .weight(1f)
+                            .padding(4.dp)
+                    ) {
+                        HomeFunctionButton(
+                            imageRes = R.drawable.user_icon, // Replace with your actual image resource
+                            text = "Button $buttonIndex",
+                            onClick = { onButtonClick(buttonIndex) }
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun HomeFunctionButton(imageRes: Int, text: String, onClick: () -> Unit) {
+    Box(
+        modifier = Modifier.fillMaxSize()
+    ) {
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
+            Button(
+                onClick = onClick,
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = Color.Red
+                ),
+                shape = RoundedCornerShape(22.dp),
+                modifier = Modifier.width(75.dp).height(75.dp))
+            {
+                Image(
+                    painter = painterResource(id = imageRes),
+                    contentDescription = null,
+                    contentScale = ContentScale.FillBounds,
+                    modifier = Modifier.fillMaxSize()
+                )
+            }
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f),
+                text = text,
+                fontSize = 12.sp,
+                textAlign = TextAlign.Center,
+                color = Color.Black
+            )
+        }
+    }
+}
+
+fun onButtonClick(buttonIndex: Int) {
+    when (buttonIndex) {
+        1 -> println("Button 1 clicked")
+        2 -> println("Button 2 clicked")
+        3 -> println("Button 3 clicked")
+        4 -> println("Button 4 clicked")
+        5 -> println("Button 5 clicked")
+        6 -> println("Button 6 clicked")
+        // Add more cases if needed
+    }
+}
+
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     JetpackInitializingTheme {
-        Home("Android")
+        Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
+            Home(modifier = Modifier.padding(innerPadding))
+        }
     }
 }
